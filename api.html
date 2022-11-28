@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <style>
+        body{
+            background-image: url("https://th.bing.com/th/id/R.5a2dd06fae07f23f0490c24b1190e321?rik=HpA7zA0XLMDQKg&riu=http%3a%2f%2fs1.picswalls.com%2fwallpapers%2f2015%2f09%2f08%2ffree-white-wallpaper_021209710_265.jpg&ehk=vJ9ImMb6ZepcrvVMaABa%2fZHC%2bKvFL%2bA9mxL3VlM%2biMs%3d&risl=&pid=ImgRaw&r=0");
+        }
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+       
+        td, th {
+          border: 1px solid #59f8f8;
+          text-align: left;
+          padding: 8px;
+        }
+       
+        tr:nth-child(even) {
+          background-color: #fcf3fb;
+        }
+        </style>
+        </head>
+<body>
+
+  <center><h2>Random User API</h2></center>
+
+
+
+  <script>
+   
+const api_url = "https://randomuser.me/api";
+async function getUser() {
+ 
+  const resultlist=[]
+  for(let i = 0; i < 5; i++){
+    const response = await fetch(api_url);
+    const data = await response.json();
+    resultlist[i]=data.results[0];
+
+  }
+console.log(resultlist);
+var temp=" ";
+resultlist.forEach(user => {
+  console.log(user)
+    let { first, last} = user.name;
+    let {gender,email, phone} = user;
+    let age = user.dob.age;
+    let {city,state} = user.location;
+    let country = user.location.country;
+    let fullName = first + " " + last;
+    temp += "<tr>";
+   
+      temp += "<td>" + fullName + "</td>"
+      temp += "<td>" + age + "</td>"
+      temp += "<td>" + gender + "</td>"
+      temp +=  "<td>" + city + "</td>"
+      temp +=  "<td>" + country + "</td></tr>";
+         
+        }
+  );
+
+  document.getElementById('data').innerHTML = temp;
+ 
+}
+
+getUser();
+
+
+</script>
+<table>
+  <thead>
+    <th>Full Name</th>
+    <th>Age</th>
+    <th>Gender</th>
+    <th>Location</th>
+    <th>Country</th>
+  </thead>
+
+  <tbody id="data"></tbody>
+
+</table>
+</body>
+</html>
